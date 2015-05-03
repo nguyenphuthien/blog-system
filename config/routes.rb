@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
-  get 'home/home'
+  resources :comments
+
+  resources :entries
+
+  get 'login' => 'sessions#new'
+
+  post 'login' => 'sessions#create'
+
+  delete 'logout' => 'sessions#destroy'
+
+  resources :users
+
+  get 'home' => 'home#home'
+  get 'header' => 'home#_header'
+  get 'footer' => 'home#_footer'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

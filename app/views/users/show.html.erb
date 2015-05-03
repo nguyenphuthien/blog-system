@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<% provide(:title, @user.email) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>Hello, </h1>
+      <h3 style="color: blue">
+        <%= @user.email %>
+      </h3>
+    </section>
+  </aside>
+</div>
+<div class="col-md-8">
+  <ol class="entries">
+    <% if !@entry.nil? %>
+     <%= link_to @entry.title, @entry %> <br/>
+     <%= @entry.body %>
+    <% end %>
+  </ol>
+</div>
+<div style="float:right"><%= link_to "Post something", new_entry_path %></div>>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Log out', logout_path, method: "delete" %> |
+<%= link_to 'Profile', users_path(current_user) %> |
+<%= link_to 'All Users', users_path %>
