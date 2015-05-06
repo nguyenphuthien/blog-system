@@ -33,7 +33,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        log_in(@user)
+        format.html { redirect_to user_path(@user) }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -83,7 +84,7 @@ class UsersController < ApplicationController
   def logged_in_user
       unless logged_in?
         flash[:danger] = "Please log in."
-        redirect_to login_url
+        redirect_to login_path
       end
   end
 
