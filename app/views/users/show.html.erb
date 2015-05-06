@@ -9,7 +9,23 @@
       </h3>
     </section>
   </aside>
+
 </div>
+<% @user ||= current_user %>
+  <div class="stats">
+    <a href="<%= following_user_path(@user) %>">
+      <strong id="following" class="stat">
+        <%= @user.following.count %>
+      </strong>
+      following
+    </a>
+    <a href="<%= followers_user_path(@user) %>">
+      <strong id="followers" class="stat">
+        <%= @user.followers.count %>
+      </strong>
+      followers
+    </a>
+  </div>
 <div class="col-md-8">
   <h5>Post</h5>
   <ol class="entries">
