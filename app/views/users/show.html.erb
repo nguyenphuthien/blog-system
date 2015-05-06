@@ -1,54 +1,59 @@
-<p id="notice"><%= notice %></p>
-<% provide(:title, @user.email) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>Hello, </h1>
-      <h3 style="color: blue">
-        <%= @user.email %>
-      </h3>
-    </section>
-  </aside>
+<% if logged_in? %>
+  <% provide(:title, @user.email) %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <h1>Hello, </h1>
+        <h3 style="color: blue">
+          <%= @user.email %>
+        </h3>
+      </section>
+    </aside>
 
-</div>
-<% @user ||= current_user %>
-  <div class="stats">
-    <a href="<%= following_user_path(@user) %>">
-      <strong id="following" class="stat">
-        <%= @user.following.count %>
-      </strong>
-      following
-    </a>
-    <a href="<%= followers_user_path(@user) %>">
-      <strong id="followers" class="stat">
-        <%= @user.followers.count %>
-      </strong>
-      followers
-    </a>
   </div>
-<div class="col-md-8">
-  <h5>Post</h5>
-  <ol class="entries">
-    <% if !@entries.nil? %>
-       <div>
-        <%= link_to @entries.title, @entries, class: "entry" %> - Created at <%= @entries.date %>
-       </div>
-       <br/>
-       <div class="entry-body">
-        <%= @entries.body %>
-       </div>
-       <div class="comment-body">
-        <% if !@comment.nil? %>
-         <%= @comment.body %> posted by <%= @comment.user_id %>
-        <% end %>
-       </div>
-       <p style="float:right"><%= link_to "Comment", new_comment_path %></p>
+  <% @user ||= current_user %>
+    <div class="stats">
+      <a href="<%= following_user_path(@user) %>">
+        <strong id="following" class="stat">
+          <%= @user.following.count %>
+        </strong>
+        following
+      </a> |
+      <a href="<%= followers_user_path(@user) %>">
+        <strong id="followers" class="stat">
+          <%= @user.followers.count %>
+        </strong>
+        followers
+      </a>
+    </div>
+  <div class="col-md-8">
+    <%= render "follow_form" if logged_in? %>
+    <h5>Post</h5>
+    <ol class="entries">
+      <% if !@entries.nil? %>
+         <div>
+          <%= link_to @entries.title, @entries, class: "entry" %> - Created at <%= @entries.date %>
+         </div>
+         <br/>
+         <div class="entry-body">
+          <%= @entries.body %>
+         </div>
+         <div class="comment-body">
+          <% if !@comment.nil? %>
+           <%= @comment.body %> posted by <%= @comment.user_id %>
+          <% end %>
+         </div>
+         <p style="float:right"><%= link_to "Comment", new_comment_path %></p>
 
-    <% end %>
-  </ol>
-</div>
-<div style="float:right"><%= link_to "Post something", new_entry_path %></div>>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Log out', logout_path, method: "delete" %> |
-<%= link_to 'Profile', users_path(current_user) %> |
-<%= link_to 'All Users', users_path %>
+      <% end %>
+    </ol>
+  </div>
+  <div style="float:right"><%= link_to "Post something", new_entry_path %></div>>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Log out', logout_path, method: "delete" %> |
+  <%= link_to 'Profile', users_path(current_user) %> |
+  <%= link_to 'All Users', users_path %>
+<% else %>
+ Please log in <%= link_to "Login", login_path %><br/>
+ or <%= link_to "Sign_up", new_user_path %>
+<% end %>
