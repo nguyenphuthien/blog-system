@@ -11,10 +11,23 @@
   </aside>
 </div>
 <div class="col-md-8">
+  <h5>Post</h5>
   <ol class="entries">
-    <% if !@entry.nil? %>
-     <%= link_to @entry.title, @entry %> <br/>
-     <%= @entry.body %>
+    <% if !@entries.nil? %>
+       <div>
+        <%= link_to @entries.title, @entries, class: "entry" %> - Created at <%= @entries.date %>
+       </div>
+       <br/>
+       <div class="entry-body">
+        <%= @entries.body %>
+       </div>
+       <div class="comment-body">
+        <% if !@comment.nil? %>
+         <%= @comment.body %> posted by <%= @comment.user_id %>
+        <% end %>
+       </div>
+       <p style="float:right"><%= link_to "Comment", new_comment_path %></p>
+
     <% end %>
   </ol>
 </div>

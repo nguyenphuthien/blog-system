@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
    @user = User.find(params[:id])
-   @entry = Entry.find_by(user_id: @user.id)
+   @entries = Entry.find_by(user_id: @user.id)
+   # @entries = User.entries
   end
 
   # GET /users/new

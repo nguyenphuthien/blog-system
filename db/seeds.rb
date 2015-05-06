@@ -9,10 +9,29 @@
 #              password:              "tony",
 #              password_confirmation: "tony")
 
-# 20.times do |n|
-#   email = "tony-#{n+1}@tony.org"
-#   password = "tony"
-#   User.create!(email: email,
-#                password:              password,
-#                password_confirmation: password)
-# end
+# Users
+User.create!(email: "example@railstutorial.org",
+             password:              "foobar")
+
+99.times do |n|
+  name  = Faker::Name.name
+  email = "example-#{n+1}@railstutorial.org"
+  password = "password"
+  User.create!(email: email,
+              password: password)
+end
+
+# Entries
+users = User.order(:created_at).take(6)
+50.times do
+  body = Faker::Lorem.sentence(5)
+  users.each { |user| user.entries.create!(body: body) }
+end
+
+# Following relationships
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
