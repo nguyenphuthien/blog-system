@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
-
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+                                        :following, :followers]
   # GET /users
   # GET /users.json
   def index
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
   def show
    @user = User.find(params[:id])
    @entries = Entry.find_by(user_id: @user.id)
+   @comments = Comment.find_by(entries_id: @entries)
    # @entries = User.entries
   end
 
@@ -78,6 +80,12 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

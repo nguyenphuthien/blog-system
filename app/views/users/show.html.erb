@@ -39,10 +39,11 @@
           <%= @entries.body %>
          </div>
          <div class="comment-body">
-          <% if !@comment.nil? %>
-           <%= @comment.body %> posted by <%= @comment.user_id %>
+          <% if !@comments.nil? %>
+           <%= @comments.body %> posted by <%= current_user.email %>
           <% end %>
          </div>
+
          <p style="float:right"><%= link_to "Comment", new_comment_path %></p>
 
       <% end %>
