@@ -14,8 +14,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
+    @entry = Entry.find params[:entry_id]
     @comment = Comment.new
-
   end
 
   # GET /comments/1/edit
@@ -25,9 +25,17 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
-    redirect_to current_user
-
+    @entry = Entry.find params[:entry_id]
+    @comment = @entry.comments.new comment_params
+    @comment.user = current_user
+    @user = User.find @entry.user_id
+    if @comment.save
+      flash[:success] = "Create comment successfully"
+      redirect_to @user
+    else
+      byebug
+      render :new
+    end
   end
 
   # PATCH/PUT /comments/1
@@ -55,13 +63,11 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:body, :date, :user_id, :entries_id)
-    end
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
 end

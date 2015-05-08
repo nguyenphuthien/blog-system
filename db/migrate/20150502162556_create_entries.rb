@@ -3,7 +3,6 @@ class CreateEntries < ActiveRecord::Migration
     create_table :entries do |t|
       t.string :title
       t.text :body
-      t.datetime :date
       t.references :user, index: true
 
       t.timestamps null: false

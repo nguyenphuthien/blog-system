@@ -12,8 +12,11 @@
     <strong>Body:</strong> <br/>
     <textarea><%= @entry.body %></textarea>
   </p>
-</div>
 
+  <span>Comments</span>
+
+  <%= render partial: 'comment', collection: @entry.comments, as: :c %>
+</div>
 
 
 <%= link_to 'Edit', edit_entry_path(@entry) %> |

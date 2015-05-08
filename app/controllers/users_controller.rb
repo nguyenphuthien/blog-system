@@ -12,9 +12,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
    @user = User.find(params[:id])
-   @entries = Entry.find_by(user_id: @user.id)
-   @comments = Comment.find_by(entries_id: @entries)
-   # @entries = User.entries
+   @entries = @user.entries
+   @comment = Comment.new
+
   end
 
   # GET /users/new
@@ -93,7 +93,6 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :password)
