@@ -13,4 +13,6 @@
  *= require_tree .
  *= require_self
  */
-
+#create_comment{
+  margin-left: 15%
+}

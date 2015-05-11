@@ -28,13 +28,20 @@ class CommentsController < ApplicationController
     @entry = Entry.find params[:entry_id]
     @comment = @entry.comments.new comment_params
     @comment.user = current_user
-    @user = User.find @entry.user_id
-    if @comment.save
-      flash[:success] = "Create comment successfully"
-      redirect_to @user
-    else
-      byebug
-      render :new
+    @user = @entry.user
+
+    respond_to do |format|
+      if @comment.save
+        # UserMailer.notification_comment_email(@user).deliver_now
+        format.html { redirect_to @user }
+        format.js
+        format.json { render :show, status: :created, location: @comment }
+
+      else
+      # byebug
+        format.html { render :new }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -40,13 +40,13 @@
         </div>
 
         <div class="comment-body">
-
           <%= render partial: "comment", collection: entry.comments, as: :c %>
         </div>
-        <div style="">
-          <%= form_for [entry,@comment] do |f| %>
+        <div id="create_comment">
+
+          <%= form_for [entry,@comment], remote: true do |f| %>
            <div class="field">
-            <%= f.text_area :body, size: "50x1" %>
+            <%= f.text_area :body, size: "50x1", id: "comment-text" %>
            </div>
            <div class="actions">
             <%= f.submit "Comment" %>

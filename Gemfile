@@ -29,7 +29,7 @@ gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+# gem 'actionview-encoded_mail_to'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -42,6 +42,7 @@ group :development, :test do
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
+  gem "letter_opener"
 end
 
 group :production do
