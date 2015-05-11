@@ -1,2 +1,2 @@
-$("<%= escape_javascript(render @comment) %>").appendTo(".comment-body");
-$("#comment-text").val("");
+$("<%= escape_javascript(render @comment) %>").appendTo("#comment-body-<%= @entry.id %>");
+$(".comment-text").val("");
