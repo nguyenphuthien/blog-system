@@ -1,3 +1,8 @@
-<% @entries.each_with_index do |entry, index| %>
-  <p><%= index %> - <%= entry.title %></p>
+<% @entries.each do |entry| %>
+  <div id="entry-<%= entry.id %>">
+    <p>
+      <%= entry.id %> - <%= entry.title %>
+      <%= link_to "Edit", edit_admin_entry_path(entry), remote: true %>
+    </p>
+  </div>
 <% end %>

@@ -1,0 +1,7 @@
+<div id="edit-entry-form">
+  <%= form_for [:admin,@entry], remote: true do |f| %>
+    <%= f.text_field :title, value: @entry.title %>
+    <%= f.text_area :body, value: @entry.body %>
+    <%= f.submit "Save", remote: true %>
+  <% end %>
+</div>

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "dashboard#home"
     resources :entries
+    resources :users
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

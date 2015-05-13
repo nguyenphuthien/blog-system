@@ -1,0 +1,11 @@
+<h1>Listing Users</h1>
+<%= @users.each_with_index do |user, index| %>
+  <p>
+    <%= index %> -
+    <%= user.email %>
+    <div id = "handler-<%= user.id %>" style ="margin-left: 30%">
+      <%= link_to "Edit", "#" %> |
+      <%= link_to "Delete", "#" %>
+    </div>
+  </p>
+<% end %>
