@@ -3,5 +3,6 @@
     <%= @entry.id %> -
     <%= @entry.title %>
     <%= link_to "Edit", edit_admin_entry_path(@entry), remote: true %>
+    <%= link_to "Delete", admin_entry_path(@entry), method: :delete, data: { confirm: 'Are you sure?' } %>
   </p>
 </div>

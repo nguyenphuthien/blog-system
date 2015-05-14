@@ -6,7 +6,6 @@ class  Admin::EntriesController < ApplicationController
   end
 
   def edit
-    @entry = Entry.find params[:id]
   end
 
   def update
@@ -21,8 +20,9 @@ class  Admin::EntriesController < ApplicationController
   def destroy
     @entry.destroy
     respond_to do |format|
-      format.html {redirect_to admin_entries_path }
+      format.html {redirect_to admin_entries_path, notice: "Xin chao" }
       format.js
+      format.json { head :no_content }
     end
   end
 

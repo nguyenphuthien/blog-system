@@ -14,7 +14,6 @@ class UsersController < ApplicationController
    @user = User.find(params[:id])
    @entries = @user.entries
    @comment = Comment.new
-
   end
 
   # GET /users/new
