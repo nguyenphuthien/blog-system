@@ -1,0 +1,13 @@
+<%= form_for [:admin,@category] do |f| %>
+  <div class='field'>
+    <%= f.label :c_name, value: "Category Name" %>
+    <%= f.text_field :c_name %>
+  </div>
+  <%= f.fields_for :questions do |builder| %>
+    <%= render "question_fields", :f => builder %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Create Category" %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<% @categories.each do |c| %>
+  <p>
+    <%= c.c_name %>
+    <% c.questions.each do |q| %>
+      | <%= q.q_name %>
+    <% end %>
+  </p>
+<% end %>
+<%= link_to "New Category", new_admin_category_path %>
