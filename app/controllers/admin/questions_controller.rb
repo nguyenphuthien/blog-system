@@ -1,7 +1,7 @@
-class Admin::QuestionsController < ApplicationController
+class Admin::CategoriesController < ApplicationController
+  before_action :set_category, only:[:questions]
 
   def index
-    @questions = Question.all
   end
 
   def new
@@ -12,16 +12,23 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.save
+    @question = Question.new question_params
+    if @question.save
+      redirect_to admin_categories_path
+    end
   end
 
   def destroy
   end
 
   private
+  def set_question
+    @question = Question.find params[:id]
+  end
 
   def question_params
-    params.require(:question).permit(:q_name, :category)
+    params.require(:question).permit(:category, :q_name,:options_attributes => [:body, :answer]])
   end
+
+
 end

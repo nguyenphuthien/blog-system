@@ -1,0 +1,13 @@
+<p>
+  <strong>Category : <%= @category.c_name %></strong><br/>
+  <% @category.questions.each do |q| %>
+    -  <strong>Question : <%= q.q_name %></strong>
+    <% q.options.each_with_index do |o, index| %>
+      <p>
+        <%= index + 1 %> : <%= o.body %>
+        <%= check_box(o, :answer) %>
+      </p>
+    <% end %>
+  <% end %>
+  <%= button_to "Show result",  %>
+</p>

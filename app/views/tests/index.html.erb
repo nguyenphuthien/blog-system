@@ -1,0 +1,7 @@
+<% @categories.each do |c| %>
+  <p>
+    <strong>
+      <%= link_to c.c_name, test_path(c.id) %>
+    </strong>
+  </p>
+<% end %>

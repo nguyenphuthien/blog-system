@@ -1,8 +1,17 @@
 <% @categories.each do |c| %>
   <p>
-    <%= c.c_name %>
+    <strong>Category : <%= c.c_name %></strong>
+    <br/>
     <% c.questions.each do |q| %>
-      | <%= q.q_name %>
+      -  <strong>Question : <%= q.q_name %></strong>
+      <% q.options.each_with_index do |o, index| %>
+        <p>
+          <%= index + 1 %> : <%= o.body %>
+          <% if o.answer == true  %>
+            right answer
+          <% end %>
+        </p>
+      <% end %>
     <% end %>
   </p>
 <% end %>

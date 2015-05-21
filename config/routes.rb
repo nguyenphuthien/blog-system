@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :tests
+
   resources :relationships, only: [:create, :destroy]
 
   namespace :admin do

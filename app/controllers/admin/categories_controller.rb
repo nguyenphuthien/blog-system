@@ -1,5 +1,5 @@
 class Admin::CategoriesController < ApplicationController
-  before_action :set_category, only:[:questions]
+  before_action :set_category, only:[:edit]
 
   def index
     @categories = Category.all
@@ -8,7 +8,7 @@ class Admin::CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    1.times do
+    5.times do
       question = @category.questions.build
       4.times { question.options.build }
     end
@@ -19,10 +19,8 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     @category = Category.new category_params
-    @question = @category.questions.new
-    # @options = @question.options.new params[:body]
 
-    if @category.save && @question.save
+    if @category.save
       redirect_to admin_categories_path
     end
 
@@ -37,7 +35,9 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:c_name, questions_attributes: [:q_name])
+    params.require(:category).permit(:c_name,
+                                      questions_attributes: [:q_name,
+                                                             :options_attributes => [:body, :answer]])
   end
 
 
